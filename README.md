@@ -1,4 +1,4 @@
-This Python code illustrates how Large Language Models / generative AI works, but using a
+This Python code illustrates how a Large Language Model / generative AI works, but using a
 transparent algorithm instead of deep learning and neural nets. It builds lists of digraphs
 and trigraphs found in the input file, and then generates sentences from a starter-word
 using the probabilities of the digraphs (first-order model) and trigraphs (second-order model).
