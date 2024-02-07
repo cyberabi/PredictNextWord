@@ -13,7 +13,7 @@ statistics much as are these simple examples.
 
 Sample run:
 
-<!-- Adding Blockquote -->
+```
 Enter source text file name: wuthering_heights.txt
 
 First-order variations on 'this':
@@ -135,4 +135,4 @@ Second-order variations on 'heathcliff':
  heathcliff!
  heathcliff!
  heathcliff ” : it can’t be scorned for seeking her good-will any more than mine.
->
+```
