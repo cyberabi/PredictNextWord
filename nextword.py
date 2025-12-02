@@ -19,6 +19,8 @@ def isPunct(char):
 
 def isEndOfSentence(token):
     # True if the token marks the end of a sentence
+    if token is None:
+        return True
     terminators = ['.', '!', '?']
     return token in terminators
 
@@ -65,7 +67,7 @@ def tokenize(text):
     return tokens
 
 #
-# First-order model (looks only at preceding token)
+# First-order model (looks only at preceding word)
 #
 def makeFirstOrderModel(tokens: list[str]):
     # First-order model
@@ -85,7 +87,9 @@ def predictNextWordFirstOrder(model, currentWord, predecessor):
     # Using a first order model, predict the next word by
     # selecting from the known successors based on frequency.
     # predecessor is ignored
-    nextWord = random.choice(list(model[currentWord]))
+    nextWord = None
+    if currentWord in model.keys():
+        nextWord = random.choice(list(model[currentWord]))
     return nextWord
 
 def generateSentenceFirstOrder(model, starter):
@@ -96,7 +100,7 @@ def generateSentenceFirstOrder(model, starter):
     while not isEndOfSentence(currentWord):
         sentence += (' ' + currentWord)
         currentWord = predictNextWordFirstOrder(model, currentWord, '')
-    sentence += currentWord  # Trailing period, question mark, or exclamation
+    sentence += currentWord if currentWord else '.'  # Trailing period, question mark, or exclamation
     return sentence
 
 #
@@ -123,11 +127,15 @@ def makeSecondOrderModel(tokens: list[str]):
 def predictNextWordSecondOrder(model, currentWord, predecessor):
     # Using a second order model, predict the next word by
     # selecting from the known successors based on frequency
-    nextWord = random.choice(list((model[currentWord])[predecessor]))
+    nextWord = None
+    if currentWord in model.keys():
+        nextWord = random.choice(list((model[currentWord])[predecessor]))
     return nextWord
 
 def getRandomPredecessorSecondOrder(model, currentWord):
-    predecessor = random.choice(list(model[currentWord].keys()))
+    predecessor = None
+    if currentWord in model.keys():
+        predecessor = random.choice(list(model[currentWord].keys()))
     return predecessor
 
 def generateSentenceSecondOrder(model, starter):
@@ -141,16 +149,19 @@ def generateSentenceSecondOrder(model, starter):
         newPredecessor = currentWord
         currentWord = predictNextWordSecondOrder(model, currentWord, predecessor)
         predecessor = newPredecessor
-    sentence += currentWord  # Trailing period, question mark, or exclamation
+    sentence += currentWord if currentWord else '.'  # Trailing period, question mark, or exclamation
     return sentence
 
 # Main line
 if __name__ == '__main__':
     # Get some training text
-    sourceTextFileName = input('Enter source text file name: ')
-    file = io.open(sourceTextFileName, mode="r", encoding="utf-8")
-    sourceText = file.read()
-    file.close()
+    sourceText = ''
+    sourceTextFileNames = input('Enter comma-separated source text file names: ')
+    for filename in sourceTextFileNames.split(','):
+        file = io.open(filename.strip(), mode="r", encoding="utf-8")
+        sourceText += file.read()
+        sourceText += '\n'
+        file.close()
 
     # Tokenize it into words and punctuation
     sourceTokens = tokenize(sourceText)
@@ -159,11 +170,11 @@ if __name__ == '__main__':
     counts = Counter(sourceTokens)
     print(counts)
 
-    # First-order model (looks only at previous word)
+    # First-order model (looks only at previous token)
     # This model is a dictionary of multisets
     firstOrderModel = makeFirstOrderModel(sourceTokens)
 
-    # Second-order model (looks at previous two words)
+    # Second-order model (looks at previous two tokens)
     # This model is a dictionary of dictionaries of multisets
     secondOrderModel = makeSecondOrderModel(sourceTokens)
 
@@ -182,7 +193,7 @@ if __name__ == '__main__':
         Obviously a word that occurs only once in the training data
         will always be followed by the same word when generating
     """
-    testWords = ['this', 'precincts', 'truth', 'once', 'heathcliff']
+    testWords = ['this', 'precincts', 'truth', 'once', 'heathcliff', 'conversation', 'bolkónski']
     print()
     for testWord in testWords:
         print(f'\nFirst-order variations on \'{testWord}\':')
