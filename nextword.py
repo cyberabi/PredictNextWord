@@ -138,12 +138,15 @@ def getRandomPredecessorSecondOrder(model, currentWord):
         predecessor = random.choice(list(model[currentWord].keys()))
     return predecessor
 
-def generateSentenceSecondOrder(model, starter):
+def generateSentenceSecondOrder(model, starter, predecessor = None):
     # Using a second order model and starting from the given
     # word, generate until end of sentence
     sentence = ''
     currentWord = starter
-    predecessor = getRandomPredecessorSecondOrder(model, currentWord)
+    if not predecessor:
+        predecessor = getRandomPredecessorSecondOrder(model, currentWord)
+    else:
+        sentence += (' ' + predecessor)
     while not isEndOfSentence(currentWord):
         sentence += (' ' + currentWord)
         newPredecessor = currentWord
@@ -179,7 +182,7 @@ if __name__ == '__main__':
     secondOrderModel = makeSecondOrderModel(sourceTokens)
 
     """
-        Test cases, based on starter words from "Wuthering Heights"
+        Test cases, based on starter words from "Wuthering Heights" and "War and Peace"
     
         In the "Wuthering Heights" source text, the starter words
         occur the following numbers of times. 
@@ -193,14 +196,18 @@ if __name__ == '__main__':
         Obviously a word that occurs only once in the training data
         will always be followed by the same word when generating
     """
-    testWords = ['this', 'precincts', 'truth', 'once', 'heathcliff', 'conversation', 'bolkónski']
+    testWords = ['this', 'precincts', 'truth', 'once', 'heathcliff', 'conversation', 'bolkónski', 'there is', 'what if']
     print()
     for testWord in testWords:
-        print(f'\nFirst-order variations on \'{testWord}\':')
+        testWordParts = testWord.split()
+        print(f'\nFirst-order variations on \'{testWordParts[0]}\':')
         for i in range(10):
-            result = generateSentenceFirstOrder(firstOrderModel, testWord)
+            result = generateSentenceFirstOrder(firstOrderModel, testWordParts[0])
             print(result)
         print(f'\nSecond-order variations on \'{testWord}\':')
         for i in range(10):
-            result = generateSentenceSecondOrder(secondOrderModel, testWord)
+            if len(testWordParts) > 1:
+                result = generateSentenceSecondOrder(secondOrderModel, testWordParts[1], testWordParts[0])
+            else:
+                result = generateSentenceSecondOrder(secondOrderModel, testWordParts[0])
             print(result)
