@@ -129,7 +129,8 @@ def predictNextWordSecondOrder(model, currentWord, predecessor):
     # selecting from the known successors based on frequency
     nextWord = None
     if currentWord in model.keys():
-        nextWord = random.choice(list((model[currentWord])[predecessor]))
+        if predecessor in model[currentWord]:
+            nextWord = random.choice(list((model[currentWord])[predecessor]))
     return nextWord
 
 def getRandomPredecessorSecondOrder(model, currentWord):
