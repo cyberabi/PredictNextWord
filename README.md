@@ -135,4 +135,28 @@ Second-order variations on 'heathcliff':
  heathcliff!
  heathcliff!
  heathcliff ” : it can’t be scorned for seeking her good-will any more than mine.
+
+First-order variations on 'what':
+ what are slow!
+ what it.
+ what is too sanguine anticipations , with the master , exclaimed.
+ what culpable carelessness and distressed to look to marry mr.
+ what i said , rather exasperating : but , either too high spirits before he answered , pulled me.
+ what was about his head , “ for ever i don’t notice me to me up this time to the pony , cloised shutters , miss cathy stood by answering mrs.
+ what was certain linton , leading him , i believe him a jest of people don’t mind their beauty!
+ what struck her latest ideas wandered from the house : he might sail in the journey when a fairy annie’s wedding’ — make himself , if you love that ghosts as if you now , give over england can you turning over the ploughboy , and if you , yet , “ what he would that i felt of her , hard to bed ; and complexion in the boy!
+ what she half an opportunity of agitation ; and observed , during her father’s knee , and the scoundrel had seized a little dog.
+ what a deep , “ come to caress provoked his hand!
+
+Second-order variations on 'what if':
+ what if she were more submissive to his enemies all around!
+ what if she should wake him.
+ what if she laughed if i marry linton i can give it clean things , and in a state of dilapidation proved it to her and seized another.
+ what if she knew there was no such thing , so i anticipated no further disturbance during that space mrs.
+ what if she had seen three months’ service in mire and dust.
+ what if she thought or listened at all.
+ what if she had approached or entered , turning towards the door to songs and glees.
+ what if she could remember.
+ what if she be cold , or escape to america , and i defy you to know that you fretted over the banister and hastened to devour the porridge ; while i stay.
+ what if she had precious little , ice-cold hand!
 ```
